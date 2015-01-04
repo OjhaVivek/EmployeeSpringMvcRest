@@ -10,7 +10,7 @@
 		http://www.springframework.org/schema/tx 
         http://www.springframework.org/schema/tx/spring-tx.xsd
         http://www.springframework.org/schema/data/jpa
-        http://www.springframework.org/schema/data/jpa/spring-jpa-1.2.xsd
+        http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
         http://www.springframework.org/schema/data/repository
         http://www.springframework.org/schema/data/repository/spring-repository.xsd
         ">
@@ -59,13 +59,16 @@
 		<property name="jpaProperties">
 			<props>
 				<prop key="hibernate.show_sql">true</prop>
-				
+
 				<!-- change this property after runningfor first time to validate -->
-				<prop key="hibernate.hbm2ddl.auto">create</prop>
-				
+				<prop key="hibernate.hbm2ddl.auto">validate</prop>
+
 				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
 			</props>
 		</property>
+		<property name="jpaVendorAdapter">
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
+        </property>
 	</bean>
 
 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
@@ -75,7 +78,7 @@
 
 	<tx:annotation-driven transaction-manager="transactionManager" />
 
-	<jpa:repositories base-package="com.companyname.backend.repos.employee"
+	<jpa:repositories base-package="com.companyname.backend.repositories.employee"
 		entity-manager-factory-ref="entityManagerFactory"
 		transaction-manager-ref="transactionManager" />
 

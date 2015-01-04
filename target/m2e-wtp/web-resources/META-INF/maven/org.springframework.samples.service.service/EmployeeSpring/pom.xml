@@ -20,7 +20,7 @@
 
 
 		<!-- Spring -->
-		<spring-framework.version>3.2.3.RELEASE</spring-framework.version>
+		<spring-framework.version>4.0.7.RELEASE</spring-framework.version>
 
 		<!-- Persistence -->
 

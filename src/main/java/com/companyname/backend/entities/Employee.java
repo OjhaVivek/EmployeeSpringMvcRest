@@ -13,19 +13,31 @@ public class Employee {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "employee_id", nullable = false)
-	private String employeeId;
+	private Integer employeeId;
 
 	@Column(name = "employee_name", nullable = false)
 	private String employeeName;
 
 	@Column(name = "salary", nullable = false)
-	private Long Salary;
+	private Long salary;
 
-	public String getEmployeeId() {
+	
+
+	public Employee() {
+	}
+
+	public Employee(Integer employeeId, String employeeName, Long salary) {
+		super();
+		this.employeeId = employeeId;
+		this.employeeName = employeeName;
+		this.salary = salary;
+	}
+
+	public Integer getEmployeeId() {
 		return employeeId;
 	}
 
-	public void setEmployeeId(String employeeId) {
+	public void setEmployeeId(Integer employeeId) {
 		this.employeeId = employeeId;
 	}
 
@@ -38,17 +50,17 @@ public class Employee {
 	}
 
 	public Long getSalary() {
-		return Salary;
+		return salary;
 	}
 
 	public void setSalary(Long salary) {
-		Salary = salary;
+		this.salary = salary;
 	}
 
 	@Override
 	public String toString() {
 		return "Employee [employeeId=" + employeeId + ", employeeName="
-				+ employeeName + ", Salary=" + Salary + "]";
+				+ employeeName + ", Salary=" + salary + "]";
 	}
 	
 }

@@ -1,4 +1,4 @@
-package com.companyname.backend.repositories;
+package com.companyname.backend.repositories.common;
 
 import java.io.Serializable;
 
