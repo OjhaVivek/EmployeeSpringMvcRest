@@ -1,28 +1,37 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>org.springframework.samples.service.service</groupId>
-  <artifactId>EmployeeSpring</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <packaging>war</packaging>
-  
-    <properties>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.springframework.samples.service.service</groupId>
+	<artifactId>EmployeeSpring</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
+
+	<properties>
 
 		<!-- Generic properties -->
 		<java.version>1.7</java.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		
+
 		<!-- Web -->
 		<jsp.version>2.2</jsp.version>
 		<jstl.version>1.2</jstl.version>
 		<servlet.version>2.5</servlet.version>
-		
+
 
 		<!-- Spring -->
 		<spring-framework.version>3.2.3.RELEASE</spring-framework.version>
 
-		<!-- Hibernate / JPA -->
+		<!-- Persistence -->
+
+		<!-- Hibernate / JPA (jpa provider) -->
 		<hibernate.version>4.2.1.Final</hibernate.version>
+		<!-- Mysql (database) -->
+		<mysql.version>5.1.6</mysql.version>
+		<!-- c3po datasource/connection pooling -->
+		<hibernate.c3po.version>4.3.7.Final</hibernate.c3po.version>
+		<!-- spring data JPA -->
+		<spring.data.version>1.7.1.RELEASE</spring.data.version>
 
 		<!-- Logging -->
 		<logback.version>1.0.13</logback.version>
@@ -32,16 +41,16 @@
 		<junit.version>4.11</junit.version>
 
 	</properties>
-	
+
 	<dependencies>
-	
+
 		<!-- Spring MVC -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
 			<version>${spring-framework.version}</version>
 		</dependency>
-		
+
 		<!-- Other Web dependencies -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -60,7 +69,7 @@
 			<version>${jsp.version}</version>
 			<scope>provided</scope>
 		</dependency>
-	
+
 		<!-- Spring and Transactions -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -82,14 +91,31 @@
 			<scope>runtime</scope>
 		</dependency>
 
-		<!-- Hibernate -->
+		<!-- Persistence -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
 			<version>${hibernate.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-jpa</artifactId>
+			<version>${spring.data.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-c3p0</artifactId>
+			<version>${hibernate.c3po.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>${mysql.version}</version>
+		</dependency>
 
-		
+
+
+
 		<!-- Test Artifacts -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -104,5 +130,5 @@
 			<scope>test</scope>
 		</dependency>
 
-	</dependencies>	
+	</dependencies>
 </project>
