@@ -28,8 +28,10 @@ public class BackendIntegrationTest {
 			employeeModel = new EmployeeModel(null,null,150000000L);
 			System.out.println("Searching employee using salary "+employeeFacade.findFilteredEmployees(employeeModel));
 			
-			System.out.println("Creating new Employee with name Shreya and salary 1000000 ");
-			employeeModel = new EmployeeModel(null,"Shreya", 1000000L);
+			System.out.println("Updating salary of new Employee with id 3 to 1500000 ");
+			employeeModel = new EmployeeModel(3,null,null);
+			employeeModel = employeeFacade.findFilteredEmployees(employeeModel).get(0);
+			employeeModel.setSalary(1500000L);
 			employeeFacade.addEmployee(employeeModel);
 			
 			System.out.println("Complete list of employees: \n"+employeeFacade.getAllEmployees());
