@@ -14,9 +14,14 @@ public class EmployeeFacade {
 	@Autowired
 	EmployeeService employeeService;
 	
-	public void addEmployee(EmployeeModel employeeModel)
+	public EmployeeModel addEmployee(EmployeeModel employeeModel)
 	{
-		employeeService.save(employeeModel);
+		return employeeService.save(employeeModel);
+	}
+	
+	public List<EmployeeModel> findFilteredEmployees(EmployeeModel employeeModel)
+	{
+		return employeeService.getFilteredEmployees(employeeModel);
 	}
 	
 	public List<EmployeeModel> getAllEmployees()
