@@ -1,5 +1,8 @@
 package com.companyname.backend.test;
 
+import java.util.Date;
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,24 +22,42 @@ public class BackendIntegrationTest {
 		@Test
 		public void mainTest()
 		{
-			EmployeeModel employeeModel = new EmployeeModel(1,null,null);
-			System.out.println("Searching employee using id "+employeeFacade.findFilteredEmployees(employeeModel));
-		
-			employeeModel = new EmployeeModel(null,"Arjun",null);
-			System.out.println("Searching employee using name "+employeeFacade.findFilteredEmployees(employeeModel));
+//			testing cacheable
+			Date startTime = new Date();
+			List<EmployeeModel> employeeList = employeeFacade.getAllEmployees();
+			Date endTime = new Date();
 			
-			employeeModel = new EmployeeModel(null,null,150000000L);
-			System.out.println("Searching employee using salary "+employeeFacade.findFilteredEmployees(employeeModel));
+			System.out.println("Start Time: "+startTime+"\n End Time:"+endTime);
+			System.out.println("Employee List: "+employeeList);
 			
-			employeeModel = new EmployeeModel(null,"Vivek",150000000L);
-			System.out.println("Searching employee using name and salary "+employeeFacade.findFilteredEmployees(employeeModel));
+			startTime = new Date();
+			employeeList = employeeFacade.getAllEmployees();
+			endTime = new Date();
+			System.out.println("Second Start Time: "+startTime+"\nSecond End Time:"+endTime);
+			System.out.println("Second Employee List: "+employeeList);
 			
-			System.out.println("Updating salary of new Employee with id 3 to 1500000 ");
-			employeeModel = new EmployeeModel(3,null,null);
-			employeeModel = employeeFacade.findFilteredEmployees(employeeModel).get(0);
-			employeeModel.setSalary(1500000L);
-			employeeFacade.addEmployee(employeeModel);
+			EmployeeModel employeeModel = new EmployeeModel(null,"Vivek",150000000L);
+			startTime = new Date();
+			employeeList = employeeFacade.findFilteredEmployees(employeeModel);
+			endTime = new Date();
+			System.out.println("Start Time for filtered: "+startTime+"\nEnd Time for filtered:"+endTime);
+			System.out.println("Employee List for filtered: "+employeeList);
 			
-			System.out.println("Complete list of employees: \n"+employeeFacade.getAllEmployees());
+			startTime = new Date();
+			employeeList = employeeFacade.findFilteredEmployees(employeeModel);
+			endTime = new Date();
+			System.out.println("Second Start Time for filtered: "+startTime+"\nSecond End Time for filtered:"+endTime);
+			System.out.println("Second Employee List for filtered: "+employeeList);
+			
+//			testing cacheEvict
+			EmployeeModel employeeModel1 = new EmployeeModel(null,"Deepika",1400000L);
+			employeeFacade.addEmployee(employeeModel1);
+			
+			startTime = new Date();
+			employeeList = employeeFacade.findFilteredEmployees(employeeModel);
+			endTime = new Date();
+			System.out.println("Third Start Time for filtered: "+startTime+"\nThird End Time for filtered:"+endTime);
+			System.out.println("Third Employee List for filtered: "+employeeList);
+			
 		}
 }

@@ -21,6 +21,7 @@
 
 		<!-- Spring -->
 		<spring-framework.version>4.0.7.RELEASE</spring-framework.version>
+		<spring-context-support.version>4.1.4.RELEASE</spring-context-support.version>
 
 		<!-- Persistence -->
 
@@ -32,6 +33,9 @@
 		<hibernate.c3po.version>4.3.7.Final</hibernate.c3po.version>
 		<!-- spring data JPA -->
 		<spring.data.version>1.7.1.RELEASE</spring.data.version>
+
+		<!-- caching -->
+		<hibernate-ehcache.version>4.3.7.Final</hibernate-ehcache.version>
 
 		<!-- Logging -->
 		<logback.version>1.0.13</logback.version>
@@ -113,8 +117,17 @@
 			<version>${mysql.version}</version>
 		</dependency>
 
-
-
+		<!--Caching -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-ehcache</artifactId>
+			<version>${hibernate-ehcache.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>${spring-context-support.version}</version>
+		</dependency>
 
 		<!-- Test Artifacts -->
 		<dependency>
