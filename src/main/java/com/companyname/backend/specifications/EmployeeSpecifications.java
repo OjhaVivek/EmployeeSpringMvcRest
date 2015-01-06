@@ -40,9 +40,9 @@ public class EmployeeSpecifications {
 							employeeModel.getSalary()));
 				}
 
-				Predicate finalPredicate = null;
+				Predicate finalPredicate = cb.conjunction();
 				for (Predicate predicate : predicates) {
-					finalPredicate = cb.and(predicate);
+					finalPredicate = cb.and(finalPredicate,predicate);
 				}
 
 				return finalPredicate;
