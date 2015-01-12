@@ -45,4 +45,9 @@ public class EmployeeFacade {
 		}*/
 		return employeeService.getAllEmployees();
 	}
+	
+	public EmployeeModel getEmployeeByEmployeeId(Integer employeeId)
+	{
+		return employeeService.getEmployeeById(employeeId);
+	}
 }

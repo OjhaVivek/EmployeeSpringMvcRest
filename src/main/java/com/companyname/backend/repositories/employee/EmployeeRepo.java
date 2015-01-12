@@ -13,6 +13,9 @@ public interface EmployeeRepo extends CommonJPARepository<Employee, String> {
 
 	@Query(value = "From Employee")
 	List<Employee> findAll();
+	
+	@Query(value = "From Employee Where employeeId =?1")
+	Employee findById(Integer employeeId);
 
 	
 }

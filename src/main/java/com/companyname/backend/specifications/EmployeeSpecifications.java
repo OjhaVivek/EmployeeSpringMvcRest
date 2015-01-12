@@ -29,7 +29,7 @@ public class EmployeeSpecifications {
 							employeeModel.getEmployeeId()));
 				}
 
-				if (employeeModel.getEmployeeName() != null) {
+				if (employeeModel.getEmployeeName() != null && employeeModel.getEmployeeName() != "") {
 					predicates.add(cb.equal(
 							rootEmployee.<String> get("employeeName"),
 							employeeModel.getEmployeeName()));

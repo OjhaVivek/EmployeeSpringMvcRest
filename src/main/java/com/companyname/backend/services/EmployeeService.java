@@ -46,6 +46,12 @@ public class EmployeeService {
 		return employeeModelList;
 	}
 
+	@Transactional(readOnly = true)
+	public EmployeeModel getEmployeeById(Integer employeeId)
+	{
+		return mapFromEntityToModel(employeeRepo.findById(employeeId));
+	}
+	
 	EmployeeModel mapFromEntityToModel(Employee employeeEntity) {
 		return new EmployeeModel(employeeEntity.getEmployeeId(),
 				employeeEntity.getEmployeeName(), employeeEntity.getSalary());
