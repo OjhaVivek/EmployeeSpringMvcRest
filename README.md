@@ -12,3 +12,4 @@ Technologies Used:
 loosely coupled web applications.
 3. Caching - ehcache
 4. Web Technologies - jsp, javascript
+5. Server - Apache Tomcat
