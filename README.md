@@ -1,5 +1,5 @@
 # EmployeeSpring
-Employee management using spring modules
+Employee management using spring mvc, spring data jpa, ehcache, jsp, javascript and apache tomcat.
 
 Description:
 It's a employee management website with which we can perform basic crud operations and also search employees using fields. 
