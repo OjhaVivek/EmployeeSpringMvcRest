@@ -2,14 +2,17 @@
 Employee management using spring mvc, spring data jpa, ehcache, jsp, javascript and apache tomcat.
 
 Description:
-It's a employee management website with which we can perform basic crud operations and also search employees using fields. 
-This code can be used to understand how spring modules can be used to create an web application with client to backend and vice 
+It's an employee management system, exposed to users as both web and rest service, with which users can perform basic crud operations and also search employees filtered using fields. This code can be used to understand how spring modules can be used to create an web application with client to backend and vice 
 versa dataflow.
 
 Technologies Used:
 1. Persistence - Spring data jpa with hibernate, c3po for conection pooling, mysql.
 2. Spring mvc - It provides model-view-controller architecture and ready components that can be used to develop flexible and 
-loosely coupled web applications.
+loosely coupled web applications and also expose rest services.
 3. Caching - ehcache
 4. Web Technologies - jsp, javascript
 5. Server - Apache Tomcat
+
+TO-DO List: 
+1. Expose the system through webservices.
+2. Write unit tests.
