@@ -14,5 +14,4 @@ loosely coupled web applications and also expose rest services.
 5. Server - Apache Tomcat
 
 TO-DO List: 
-1. Expose the system through webservices.
-2. Write unit tests.
+1. Write unit tests.
