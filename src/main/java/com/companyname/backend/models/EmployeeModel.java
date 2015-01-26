@@ -1,6 +1,8 @@
 package com.companyname.backend.models;
 
+import org.codehaus.jackson.annotate.JsonAutoDetect;
 
+@JsonAutoDetect
 public class EmployeeModel {
 
 	private Integer employeeId;

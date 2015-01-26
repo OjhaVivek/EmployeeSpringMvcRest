@@ -19,7 +19,12 @@ public class EmployeeFacade {
 	@CacheEvict(value = { "filteredEmployees", "allEmployees" }, allEntries = true)
 	public EmployeeModel addEmployee(EmployeeModel employeeModel)
 	{
-		return employeeService.save(employeeModel);
+		try {
+			return employeeService.save(employeeModel);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
 	@Cacheable("filteredEmployees")
@@ -31,7 +36,12 @@ public class EmployeeFacade {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}*/
-		return employeeService.getFilteredEmployees(employeeModel);
+		try {
+			return employeeService.getFilteredEmployees(employeeModel);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
 	@Cacheable("allEmployees")
@@ -43,11 +53,21 @@ public class EmployeeFacade {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}*/
-		return employeeService.getAllEmployees();
+		try {
+			return employeeService.getAllEmployees();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
 	public EmployeeModel getEmployeeByEmployeeId(Integer employeeId)
 	{
-		return employeeService.getEmployeeById(employeeId);
+		try {
+			return employeeService.getEmployeeById(employeeId);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 }

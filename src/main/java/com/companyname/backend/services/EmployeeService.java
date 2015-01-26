@@ -23,6 +23,11 @@ public class EmployeeService {
 		return mapFromEntityToModel(employeeRepo.saveAndFlush(mapFromModelToEntity(employeeModel)));
 	}
 	
+	@Transactional
+	public void delete(Integer employeeId) {
+		employeeRepo.deleteById(employeeId);
+	}
+	
 	@Transactional(readOnly = true)
 	public List<EmployeeModel> getFilteredEmployees(EmployeeModel employeeModel)
 	{

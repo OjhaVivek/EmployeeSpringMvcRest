@@ -17,5 +17,7 @@ public interface EmployeeRepo extends CommonJPARepository<Employee, String> {
 	@Query(value = "From Employee Where employeeId =?1")
 	Employee findById(Integer employeeId);
 
+	@Query(value = "delete From Employee Where employeeId =?1")
+	void deleteById(Integer employeeId);
 	
 }

@@ -10,7 +10,7 @@
          <context:component-scan
             base-package="org.springframework.samples.web"/>  -->
 		<context:component-scan
-            base-package="com.companyname.web"/>
+            base-package="com.companyname.web.controllers, com.companyname.rest.controllers"/>
 
     <mvc:annotation-driven />
 
