@@ -2,6 +2,8 @@ package com.companyname.backend.facade;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
@@ -16,13 +18,16 @@ public class EmployeeFacade {
 	@Autowired
 	EmployeeService employeeService;
 	
+	Logger logger = LoggerFactory.getLogger(EmployeeFacade.class);
+	
 	@CacheEvict(value = { "filteredEmployees", "allEmployees" }, allEntries = true)
 	public EmployeeModel addEmployee(EmployeeModel employeeModel)
 	{
+		logger.info("EmployeeFacade::addEmployee() called");
 		try {
 			return employeeService.save(employeeModel);
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error("Error saving employee details",e);
 		}
 		return null;
 	}
@@ -36,10 +41,12 @@ public class EmployeeFacade {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}*/
+		logger.info("EmployeeFacade::findFilteredEmployees() called");
 		try {
-			return employeeService.getFilteredEmployees(employeeModel);
+			throw new Exception();
+			//return employeeService.getFilteredEmployees(employeeModel);
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error("Error getting employees ",e);
 		}
 		return null;
 	}
@@ -53,20 +60,22 @@ public class EmployeeFacade {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}*/
+		logger.info("EmployeeFacade::getAllEmployees() called");
 		try {
 			return employeeService.getAllEmployees();
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error("Error getting employees ",e);
 		}
 		return null;
 	}
 	
 	public EmployeeModel getEmployeeByEmployeeId(Integer employeeId)
 	{
+		logger.info("EmployeeFacade::getEmployeeByEmployeeId() called");
 		try {
 			return employeeService.getEmployeeById(employeeId);
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error("Error getting employee ",e);
 		}
 		return null;
 	}
