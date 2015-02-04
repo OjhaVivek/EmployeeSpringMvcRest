@@ -13,5 +13,13 @@ loosely coupled web applications and also expose rest services.
 4. Web Technologies - jsp, javascript
 5. Server - Apache Tomcat
 
+
+Build Configuration: clean package
+Run Configuration: tomcat:run -Dmaven.tomcat.port=8081
+
+How To Run:
+1. Create required database. Either use employee_database.sql or create them manually or change hibernate.hbm2ddl.auto property in application-config to create and again change it back to validate after first run.
+2. Change the database properties in jdbc.properties according to your mysql.
+
 TO-DO List: 
 1. Write unit tests.
