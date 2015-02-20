@@ -12,6 +12,7 @@ loosely coupled web applications and also expose rest services.
 3. Caching - ehcache
 4. Web Technologies - jsp, javascript
 5. Server - Apache Tomcat
+6. Logging - slf4j, logback-classic
 
 
 Build Configuration: clean package
