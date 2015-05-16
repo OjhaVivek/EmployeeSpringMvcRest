@@ -1,65 +1,111 @@
 package com.companyname.rest.controllers;
 
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.companyname.backend.facade.EmployeeFacade;
 import com.companyname.backend.models.EmployeeModel;
 
-@RestController
-@RequestMapping("/api/employee")
+@Controller
+@RequestMapping(value = "/api/employee", produces = APPLICATION_JSON_VALUE)
 public class EmployeeRestController {
 
 	@Autowired
 	EmployeeFacade employeeFacade;
 
+	@ResponseBody
 	@RequestMapping(value = "/{employeeId}", method = RequestMethod.GET)
-	public EmployeeModel getEmployeeById(@PathVariable("employeeId") Integer employeeId) {
-		return employeeFacade.getEmployeeByEmployeeId(employeeId);
+	public ResponseEntity<EmployeeModel> getEmployeeById(
+			@PathVariable("employeeId") Integer employeeId) {
+		ResponseEntity<EmployeeModel> response = null;
+		EmployeeModel fetchedEmployee = employeeFacade
+				.getEmployeeByEmployeeId(employeeId);
+		if (fetchedEmployee == null) {
+			response = new ResponseEntity<EmployeeModel>(HttpStatus.NOT_FOUND);
+		} else {
+			response = new ResponseEntity<EmployeeModel>(fetchedEmployee,
+					HttpStatus.OK);
+		}
+		return response;
 
 	}
 
-	@RequestMapping(value = "/{employeeId}", method = RequestMethod.PUT, consumes = "application/json")
-	public EmployeeModel UpdateEmployee(
-			@RequestBody EmployeeModel employeeModel,
-			@PathVariable("employeeId") Integer employeeId) {
-		EmployeeModel tempEmployeeModel = employeeFacade
-				.getEmployeeByEmployeeId(employeeId);
-		if (tempEmployeeModel != null) {
-			tempEmployeeModel.setEmployeeName(employeeModel.getEmployeeName());
-			tempEmployeeModel.setSalary(employeeModel.getSalary());
-			EmployeeModel tEM = employeeFacade.addEmployee(tempEmployeeModel);
-			if (tEM == null) {
-				return null;
+	@ResponseBody
+	@RequestMapping(method = RequestMethod.PUT, consumes = "application/json")
+	public ResponseEntity<EmployeeModel> UpdateEmployee(
+			@RequestBody EmployeeModel employeeModel) {
+		ResponseEntity<EmployeeModel> response = null;
+		if (employeeModel.getEmployeeId() == null) {
+			response = new ResponseEntity<EmployeeModel>(HttpStatus.BAD_REQUEST);
+		} else {
+			EmployeeModel tempEmployeeModel = employeeFacade
+					.getEmployeeByEmployeeId(employeeModel.getEmployeeId());
+			if (tempEmployeeModel != null) {
+				tempEmployeeModel.setEmployeeName(employeeModel
+						.getEmployeeName());
+				tempEmployeeModel.setSalary(employeeModel.getSalary());
+				EmployeeModel tEM = employeeFacade
+						.addEmployee(tempEmployeeModel);
+				if (tEM == null) {
+					response = new ResponseEntity<EmployeeModel>(
+							HttpStatus.INTERNAL_SERVER_ERROR);
+				} else {
+					response = new ResponseEntity<EmployeeModel>(tEM,
+							HttpStatus.OK);
+				}
+			} else {
+				response = new ResponseEntity<EmployeeModel>(
+						HttpStatus.NOT_FOUND);
 			}
 		}
-		return tempEmployeeModel;
+		return response;
 
 	}
 
+	@ResponseBody
 	@RequestMapping(method = RequestMethod.GET)
-	public List<EmployeeModel> fetchEmployeeList() {
-
-		return employeeFacade.getAllEmployees();
+	public ResponseEntity<List<EmployeeModel>> fetchEmployeeList() {
+		ResponseEntity<List<EmployeeModel>> response = null;
+		List<EmployeeModel> employeeList = employeeFacade.getAllEmployees();
+		if (employeeList == null || employeeList.isEmpty()) {
+			response = new ResponseEntity<List<EmployeeModel>>(
+					HttpStatus.NOT_FOUND);
+		} else {
+			response = new ResponseEntity<List<EmployeeModel>>(employeeList,
+					HttpStatus.OK);
+		}
+		return response;
 	}
 
+	@ResponseBody
 	@RequestMapping(method = RequestMethod.POST, consumes = "application/json")
-	public Boolean postEmployee(@RequestBody EmployeeModel employeeModel) {
-
+	public ResponseEntity<String> postEmployee(
+			@RequestBody EmployeeModel employeeModel) {
+		ResponseEntity<String> response = null;
 		if (employeeModel.getEmployeeId() != null) {
-			return false;
+			response = new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+		} else {
+			EmployeeModel tEM = employeeFacade.addEmployee(employeeModel);
+			if (tEM == null) {
+				response = new ResponseEntity<String>(
+						HttpStatus.INTERNAL_SERVER_ERROR);
+			} else {
+				response = new ResponseEntity<String>("Successfully updated",
+						HttpStatus.OK);
+			}
 		}
-		EmployeeModel tEM = employeeFacade.addEmployee(employeeModel);
-		if (tEM == null) {
-			return false;
-		}
-		return true;
+		return response;
 	}
 
 	// not doing anything

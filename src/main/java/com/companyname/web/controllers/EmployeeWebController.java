@@ -13,7 +13,7 @@ import com.companyname.backend.facade.EmployeeFacade;
 import com.companyname.backend.models.EmployeeModel;
 
 @Controller
-public class BaseController {
+public class EmployeeWebController {
 
 	@Autowired
 	EmployeeFacade employeeFacade;
