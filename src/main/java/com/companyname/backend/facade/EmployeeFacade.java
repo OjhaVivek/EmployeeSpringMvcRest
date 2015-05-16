@@ -43,8 +43,8 @@ public class EmployeeFacade {
 		}*/
 		logger.info("EmployeeFacade::findFilteredEmployees() called");
 		try {
-			throw new Exception();
-			//return employeeService.getFilteredEmployees(employeeModel);
+			//throw new Exception();
+			return employeeService.getFilteredEmployees(employeeModel);
 		} catch (Exception e) {
 			logger.error("Error getting employees ",e);
 		}
