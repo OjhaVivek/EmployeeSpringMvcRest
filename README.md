@@ -23,4 +23,4 @@ How To Run:
 2. Change the database properties in jdbc.properties according to your mysql.
 
 TO-DO List: 
-1. Write unit tests.
+1. Integrate the rest api with swagger.
