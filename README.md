@@ -1,4 +1,4 @@
-# EmployeeSpring
+# EmployeeSpringMvcRest
 Employee management using spring mvc, spring data jpa, ehcache, jsp, javascript and apache tomcat.
 
 Description:
